@@ -1,0 +1,1 @@
+web: gunicorn hsapi.wsgi --log-file -
