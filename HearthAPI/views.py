@@ -10,10 +10,13 @@ def index(request):
 
     card_dict_resp = {}
 
-    for i in range(1, cards_per_page + 1):
-        current_card = Cards.objects.get(id=i)
+    try:
+        for i in range(1, cards_per_page + 1):
+            current_card = Cards.objects.get(id=i)
 
-        card_dict_resp[current_card.card_id] = create_card_dict(current_card)
+            card_dict_resp[current_card.card_id] = create_card_dict(current_card)
+    except Exception as err:
+        return HttpResponse('Unknown Error: %s' % err.message)
 
 
     return JsonResponse(card_dict_resp)
